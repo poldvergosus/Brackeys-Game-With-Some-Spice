@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/game.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+MusicDoremi="*res://Scenes/MusicDoremi.tscn"
+
 [display]
 
 window/stretch/mode="viewport"

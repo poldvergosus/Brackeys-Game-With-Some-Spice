@@ -1,10 +1,110 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmgfb84lcvn7q"]
+[gd_scene load_steps=8 format=3 uid="uid://dmgfb84lcvn7q"]
 
 [ext_resource type="Script" path="res://Scripts/doremi.gd" id="1_7ubqs"]
 [ext_resource type="Texture2D" uid="uid://cshlll71mrrkl" path="res://Assets/sprites/БонусЭкстраИНВ.png" id="1_pouhl"]
+[ext_resource type="AudioStream" uid="uid://chvn4d7btvkbs" path="res://Assets/sounds/Doremi Transformation.wav" id="3_7bf4w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6suw"]
 size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_n8bq0"]
+resource_name = "pickup"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("transformationSound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ig6g2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("transformationSound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8xo0s"]
+_data = {
+"RESET": SubResource("Animation_ig6g2"),
+"pickup": SubResource("Animation_n8bq0")
+}
 
 [node name="Doremi" type="Area2D"]
 script = ExtResource("1_7ubqs")
@@ -15,5 +115,13 @@ texture = ExtResource("1_pouhl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i6suw")
+
+[node name="transformationSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7bf4w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8xo0s")
+}
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://deh2mhb08wrgc"]
+
+[ext_resource type="Script" path="res://Scenes/Node.gd" id="1_ld2ji"]
+[ext_resource type="AudioStream" uid="uid://cj1grfkd3eemr" path="res://Assets/music/Ojamajo8bit.mp3" id="2_p51ph"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_ld2ji")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_p51ph")
+autoplay = true
+bus = &"Music"

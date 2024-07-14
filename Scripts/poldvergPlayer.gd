@@ -1,5 +1,4 @@
 extends CharacterBody2D
-
 @onready var coyote_timer = $CoyoteTimer
 @onready var animated_sprite = $AnimatedSprite2D
 var infinite_jump = false

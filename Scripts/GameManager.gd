@@ -7,3 +7,4 @@ var score = 0
 func add_coin():
 	score += 1
 	score_label.text = "Собрано монет:" + str(score) + " из 30"
+
