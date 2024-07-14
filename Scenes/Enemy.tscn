@@ -10,6 +10,9 @@ var direction = 1
 @onready var ray_cast_right = $RayCastRight
 @onready var ray_cast_left = $RayCastLeft
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var ray_cast_down_right = $RayCastDownRight
+@onready var ray_cast_down_left = $RayCastDownLeft
+
 
 
 
@@ -23,6 +26,12 @@ func _process(delta):
 		direction = 1
 		animated_sprite.flip_h = false
 	position.x += direction * speed* delta
+	if ray_cast_down_right.is_colliding()== false:
+		direction = -1
+		animated_sprite.flip_h = true
+	if ray_cast_down_left.is_colliding() == false:
+		direction = 1
+		animated_sprite.flip_h = false
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o32cw"]
@@ -62,7 +71,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gohhh"]
-size = Vector2(12, 13)
+size = Vector2(12, 11)
 
 [node name="Slime" type="Node2D"]
 script = SubResource("GDScript_qa4vx")
@@ -77,7 +86,7 @@ frame_progress = 0.899838
 position = Vector2(0, -12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
-position = Vector2(0, 5.5)
+position = Vector2(0, 6.5)
 shape = SubResource("RectangleShape2D_gohhh")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
@@ -87,3 +96,11 @@ target_position = Vector2(9, 0)
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 position = Vector2(0, -6)
 target_position = Vector2(-9, 0)
+
+[node name="RayCastDownRight" type="RayCast2D" parent="."]
+position = Vector2(11, -6)
+target_position = Vector2(0, 12)
+
+[node name="RayCastDownLeft" type="RayCast2D" parent="."]
+position = Vector2(-11, -6)
+target_position = Vector2(0, 12)

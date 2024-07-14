@@ -4,13 +4,12 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 var infinite_jump = false
 var dead = false
-
-const SPEED = 105.0
-const JUMP_VELOCITY = -200.0
-
 var coyote_frames = 10  # How many in-air frames to allow jumping
 var coyote = false  # Track whether we're in coyote time or not
 var last_floor = false  # Last frame's on-floor state
+
+const SPEED = 105.0
+const JUMP_VELOCITY = -200.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -76,7 +75,6 @@ func set_infinite_jump(value):
 	infinite_jump = value
 	print("Бесконечный прыжок установлен: ", value)
 	
-
 func die():
 	if not dead:
 		dead = true
