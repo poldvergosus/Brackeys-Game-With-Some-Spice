@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-MusicDoremi="*res://Scenes/MusicDoremi.tscn"
+MusicBg="*res://Scenes/MusicBG.tscn"
 
 [display]
 
