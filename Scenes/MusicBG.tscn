@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuqo6vd70t4t4"]
+[gd_scene load_steps=3 format=3 uid="uid://cuqo6vd70t4t4"]
 
 [ext_resource type="AudioStream" uid="uid://cj1grfkd3eemr" path="res://Assets/music/Ojamajo8bit.mp3" id="1_nxqdu"]
+[ext_resource type="Script" path="res://Scenes/MusicBG.gd" id="2_xm8eb"]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
 stream = ExtResource("1_nxqdu")
@@ -8,3 +9,4 @@ autoplay = true
 max_distance = 2e+06
 attenuation = 0.000367582
 bus = &"Music"
+script = ExtResource("2_xm8eb")

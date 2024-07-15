@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dk71lul6mqitu"]
+
+[ext_resource type="Script" path="res://Scenes/DeathCounter.gd" id="1_2cbu7"]
+
+[node name="DeathCounter" type="Node"]
+script = ExtResource("1_2cbu7")

@@ -1,86 +1,83 @@
 extends CharacterBody2D
-@onready var coyote_timer = $CoyoteTimer
-@onready var animated_sprite = $AnimatedSprite2D
-@onready var animation_player = $AnimationPlayer
 
-var infinite_jump = false
-var dead = false
-var coyote_frames = 10  # How many in-air frames to allow jumping
-var coyote = false  # Track whether we're in coyote time or not
-var last_floor = false  # Last frame's on-floor state
+@onready var game_manager = %GameManager
+@onready var coyote_timer: Timer = $CoyoteTimer
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-const SPEED = 105.0
-const JUMP_VELOCITY = -200.0
+@export var SPEED: float = 105.0
+@export var JUMP_VELOCITY: float = -200.0
+@export var COYOTE_FRAMES: int = 12
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var infinite_jump: bool = false
+var dead: bool = false
+var coyote: bool = false
+var last_floor: bool = false
 
 func _ready():
-	coyote_timer.wait_time = coyote_frames / 60.0
-	
+	game_manager.update_death_label()
+	coyote_timer.wait_time = COYOTE_FRAMES / 60.0
+
 func _physics_process(delta):
-#	if dead:
-#		return 
-		# Add the gravity.
+	if dead:
+		return
+
+	apply_gravity(delta)
+	handle_coyote_time()
+	handle_jump()
+	handle_movement(delta)
+	update_animation()
+	move_and_slide()
+
+func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	# Handle Coyote Time
+func handle_coyote_time():
 	if is_on_floor():
-		last_floor = true
-	elif last_floor:
+		last_floor = true #указывает на то, что игрок был на земле в предыдущем кадре
+	elif last_floor: #проверяет, был ли игрок на земле в предыдущем кадре
 		last_floor = false
 		coyote = true
 		coyote_timer.start()
 
-	# Handle Jump.
+func handle_jump():
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote):
 		velocity.y = JUMP_VELOCITY
-		if infinite_jump==true:
-			coyote = true
-		else:
+		if not infinite_jump:
 			coyote = false
 			coyote_timer.stop()
 
+func handle_movement(delta):
 	var direction = Input.get_axis("move_left", "move_right")
-	if direction > 0:
-		animated_sprite.flip_h = false
-	elif direction < 0:
-		animated_sprite.flip_h = true
-	
+	if direction:
+		velocity.x = direction * SPEED * delta * 60
+		animated_sprite.flip_h = direction < 0
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+func update_animation():
 	if is_on_floor():
-		if direction == 0:
-			animated_sprite.play("Idle")
-		else:
-			animated_sprite.play("run")
+		animated_sprite.play("run" if velocity.x != 0 else "Idle")
 	else:
 		animated_sprite.play("jump")
 
-	if direction:
-		velocity.x = direction * SPEED * delta * 60
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
-	move_and_slide()
-
 func _on_coyote_timer_timeout():
-	if infinite_jump==true:
-		coyote_frames = 100000.0
-		coyote = true
+	if infinite_jump:
 		coyote_timer.wait_time = 20
 	else:
 		coyote = false
-	
-func set_infinite_jump(value):
+
+func set_infinite_jump(value: bool):
 	infinite_jump = value
-	print("Бесконечный прыжок установлен: ", value)
-	
+	print("Бесконечный прыжок установлен")
+
 func die():
 	if not dead:
 		dead = true
 		animated_sprite.play("dead")
 		animation_player.play("Dead")
+		game_manager.death_label_update()
 		set_physics_process(false)
-	print("Игрок умер")
-
-	
+		print("Игрок умер")
