@@ -1,6 +1,8 @@
 extends CharacterBody2D
 @onready var coyote_timer = $CoyoteTimer
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var animation_player = $AnimationPlayer
+
 var infinite_jump = false
 var dead = false
 var coyote_frames = 10  # How many in-air frames to allow jumping
@@ -78,6 +80,7 @@ func die():
 	if not dead:
 		dead = true
 		animated_sprite.play("dead")
+		animation_player.play("Dead")
 		set_physics_process(false)
 	print("Игрок умер")
 
