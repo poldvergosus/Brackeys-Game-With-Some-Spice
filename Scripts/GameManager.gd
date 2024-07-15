@@ -12,7 +12,7 @@ func death_label_update():
 func add_coin():
 	score += 1
 	score_label.text = "Собрано монет:" + str(score) + " из 30"
-	if score == 1:
+	if score == 30:
 		change_to_next_level()
 
 func update_death_label():

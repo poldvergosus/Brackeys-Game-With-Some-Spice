@@ -6,7 +6,7 @@
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
 stream = ExtResource("1_nxqdu")
 autoplay = true
-max_distance = 2e+06
+max_distance = 2e+07
 attenuation = 0.000367582
 bus = &"Music"
 script = ExtResource("2_xm8eb")

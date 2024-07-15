@@ -1045,10 +1045,10 @@ unique_name_in_owner = true
 script = ExtResource("1_rm0m4")
 
 [node name="score_label" type="Label" parent="GameManager"]
-offset_left = -356.0
-offset_top = -162.0
-offset_right = -188.0
-offset_bottom = -69.0
+offset_left = -351.0
+offset_top = -133.0
+offset_right = -183.0
+offset_bottom = -40.0
 theme_override_fonts/font = ExtResource("8_c0vqg")
 theme_override_font_sizes/font_size = 20
 text = "Собрано монет:
@@ -1059,10 +1059,11 @@ autowrap_mode = 1
 uppercase = true
 
 [node name="score_label2" type="Label" parent="GameManager"]
-offset_left = -84.0
-offset_top = -95.0
-offset_right = 84.0
-offset_bottom = -2.0
+modulate = Color(0.882353, 0.294118, 0.423529, 1)
+offset_left = -351.0
+offset_top = -85.0
+offset_right = -183.0
+offset_bottom = 8.0
 theme_override_fonts/font = ExtResource("8_c0vqg")
 theme_override_font_sizes/font_size = 20
 text = "Смертей 0"
@@ -1094,6 +1095,7 @@ layer_2/tile_data = PackedInt32Array(2883624, 262148, 1, 2818088, 262148, 1, 275
 
 [node name="Poldverg" parent="." instance=ExtResource("1_ica70")]
 unique_name_in_owner = true
+position = Vector2(25, -5)
 
 [node name="Camera2D" type="Camera2D" parent="Poldverg"]
 position = Vector2(-3, -23)
@@ -1343,7 +1345,7 @@ position = Vector2(-706, -496)
 position = Vector2(-559, -384)
 
 [node name="Doremi" parent="." instance=ExtResource("7_vjmx4")]
-position = Vector2(25, -10)
+position = Vector2(-233, 10)
 scale = Vector2(0.636063, 0.636063)
 collision_layer = 3
 collision_mask = 3
