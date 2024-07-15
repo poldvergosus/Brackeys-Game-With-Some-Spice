@@ -18,7 +18,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	coyote_timer.wait_time = coyote_frames / 60.0
 	
-
 func _physics_process(delta):
 #	if dead:
 #		return 
@@ -58,7 +57,7 @@ func _physics_process(delta):
 		animated_sprite.play("jump")
 
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * SPEED * delta * 60
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
