@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://blq5wgud5okk5"]
+
+[ext_resource type="PackedScene" uid="uid://cad4fo52x70op" path="res://Scenes/MenuBackground.tscn" id="1_08w0m"]
+[ext_resource type="Script" path="res://Scenes/Menu.gd" id="1_lg41n"]
+[ext_resource type="PackedScene" uid="uid://uu65cl4or6tw" path="res://Scenes/option_menu.tscn" id="2_0ms2k"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lg41n")
+
+[node name="Option_menu" parent="." instance=ExtResource("2_0ms2k")]
+visible = false
+top_level = true
+layout_mode = 1
+offset_left = 472.0
+offset_top = 278.0
+offset_right = 472.0
+offset_bottom = 278.0
+scale = Vector2(0.5, 0.5)
+
+[node name="Button_manager" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Start" type="Button" parent="Button_manager"]
+top_level = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 487.0
+offset_top = 274.0
+offset_right = 538.0
+offset_bottom = 296.0
+theme_override_font_sizes/font_size = 10
+text = "Start"
+
+[node name="Option" type="Button" parent="Button_manager"]
+top_level = true
+layout_mode = 0
+offset_left = 487.0
+offset_top = 300.0
+offset_right = 538.0
+offset_bottom = 322.0
+theme_override_font_sizes/font_size = 10
+text = "Options"
+
+[node name="Quit" type="Button" parent="Button_manager"]
+top_level = true
+layout_mode = 0
+offset_left = 487.0
+offset_top = 327.0
+offset_right = 538.0
+offset_bottom = 349.0
+theme_override_font_sizes/font_size = 10
+text = "Quit
+"
+
+[node name="Menu_background" parent="." instance=ExtResource("1_08w0m")]
+position = Vector2(-27, 16)
+
+[connection signal="pressed" from="Button_manager/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Button_manager/Option" to="." method="_on_option_pressed"]
+[connection signal="pressed" from="Button_manager/Quit" to="." method="_on_quit_pressed"]

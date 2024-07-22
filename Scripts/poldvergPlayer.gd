@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var jump = $jump
+
 
 @export var SPEED: float = 105.0
 @export var JUMP_VELOCITY: float = -200.0
@@ -49,6 +51,14 @@ func handle_jump():
 			coyote = false
 			coyote_timer.stop()
 
+
+func randomize_jump_sound_pitch():
+	var min_pitch = 0.5  # Минимальное значение pitch scale
+	var max_pitch = 1.1  # Максимальное значение pitch scale
+	var random_pitch = randf_range(min_pitch, max_pitch)
+	jump.pitch_scale = random_pitch
+	
+
 func handle_movement(delta):
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction:
@@ -61,7 +71,11 @@ func update_animation():
 	if is_on_floor():
 		animated_sprite.play("run" if velocity.x != 0 else "Idle")
 	else:
-		animated_sprite.play("jump")
+		if animated_sprite.animation != "jump":
+			animated_sprite.play("jump")
+			randomize_jump_sound_pitch()
+			jump.play()
+		
 
 func _on_coyote_timer_timeout():
 	if infinite_jump:

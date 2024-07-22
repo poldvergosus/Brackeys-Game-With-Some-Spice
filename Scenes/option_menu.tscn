@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://uu65cl4or6tw"]
+
+[ext_resource type="Script" path="res://Option_menu.gd" id="1_3w6ec"]
+
+[node name="Option_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3w6ec")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+offset_left = 1.0
+offset_top = 148.0
+offset_right = 211.0
+offset_bottom = 175.0
+text = "Back"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 211.0
+offset_bottom = 148.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Master volume"
+
+[node name="VolumeM" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 0.5
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music volume"
+
+[node name="VolumeS" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 0.5
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SFX volume"
+
+[node name="VolumeSFX" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 0.5
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeM" to="." method="_on_volume_m_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeS" to="." method="_on_volume_s_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VolumeSFX" to="." method="_on_volume_sfx_value_changed"]

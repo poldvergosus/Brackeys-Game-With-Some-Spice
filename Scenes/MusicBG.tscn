@@ -3,10 +3,8 @@
 [ext_resource type="AudioStream" uid="uid://cj1grfkd3eemr" path="res://Assets/music/Ojamajo8bit.mp3" id="1_nxqdu"]
 [ext_resource type="Script" path="res://Scenes/MusicBG.gd" id="2_xm8eb"]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 stream = ExtResource("1_nxqdu")
 autoplay = true
-max_distance = 2e+07
-attenuation = 0.000367582
 bus = &"Music"
 script = ExtResource("2_xm8eb")
