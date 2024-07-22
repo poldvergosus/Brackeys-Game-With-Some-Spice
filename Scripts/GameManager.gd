@@ -20,5 +20,5 @@ func update_death_label():
 	score_label_2.text = "Смертей: " + str(current_deaths)
 
 func change_to_next_level():
-	MusicBg.stop_global_audio()
+	MusicBackGround.stop_global_audio()
 	get_tree().change_scene_to_file(next_level_path)

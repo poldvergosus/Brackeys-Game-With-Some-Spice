@@ -17,8 +17,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-MusicBg="*res://Scenes/MusicBG.tscn"
+MusicBg="res://Scenes/MusicBG.tscn"
+MusicBackGround="*res://Scenes/MusicBackGround.gd"
 DeathCounter="*res://Scenes/death_counter.tscn"
+LeaderBoard="*res://Scripts/leader_board.gd"
 
 [display]
 

@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://cuqo6vd70t4t4"]
 
 [ext_resource type="AudioStream" uid="uid://cj1grfkd3eemr" path="res://Assets/music/Ojamajo8bit.mp3" id="1_nxqdu"]
-[ext_resource type="Script" path="res://Scenes/MusicBG.gd" id="2_xm8eb"]
+[ext_resource type="Script" path="res://Scenes/MusicBackGround.gd" id="2_ythiw"]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 stream = ExtResource("1_nxqdu")
+volume_db = -2.96
 autoplay = true
 bus = &"Music"
-script = ExtResource("2_xm8eb")
+script = ExtResource("2_ythiw")

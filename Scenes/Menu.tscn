@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://blq5wgud5okk5"]
+[gd_scene load_steps=6 format=3 uid="uid://blq5wgud5okk5"]
 
 [ext_resource type="PackedScene" uid="uid://cad4fo52x70op" path="res://Scenes/MenuBackground.tscn" id="1_08w0m"]
 [ext_resource type="Script" path="res://Scenes/Menu.gd" id="1_lg41n"]
 [ext_resource type="PackedScene" uid="uid://uu65cl4or6tw" path="res://Scenes/option_menu.tscn" id="2_0ms2k"]
+[ext_resource type="PackedScene" uid="uid://b28b506idtww3" path="res://Scenes/LeaderBoard.tscn" id="2_aehhc"]
+[ext_resource type="FontFile" uid="uid://cp3dbyi3lgf5p" path="res://Assets/fonts/Kenney Mini Square Mono.ttf" id="4_lal7i"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -16,6 +18,14 @@ offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lg41n")
+
+[node name="Control" parent="." instance=ExtResource("2_aehhc")]
+top_level = true
+layout_mode = 1
+offset_left = 407.0
+offset_top = 287.0
+offset_right = 407.0
+offset_bottom = 287.0
 
 [node name="Option_menu" parent="." instance=ExtResource("2_0ms2k")]
 visible = false
@@ -36,37 +46,50 @@ offset_bottom = 40.0
 top_level = true
 texture_filter = 1
 layout_mode = 0
-offset_left = 487.0
-offset_top = 274.0
-offset_right = 538.0
+offset_left = 489.0
+offset_top = 264.0
+offset_right = 557.0
 offset_bottom = 296.0
-theme_override_font_sizes/font_size = 10
+theme_override_fonts/font = ExtResource("4_lal7i")
+theme_override_font_sizes/font_size = 16
 text = "Start"
 
 [node name="Option" type="Button" parent="Button_manager"]
 top_level = true
+texture_filter = 5
 layout_mode = 0
-offset_left = 487.0
-offset_top = 300.0
-offset_right = 538.0
-offset_bottom = 322.0
-theme_override_font_sizes/font_size = 10
+offset_left = 477.0
+offset_top = 298.0
+offset_right = 569.0
+offset_bottom = 326.0
+theme_override_fonts/font = ExtResource("4_lal7i")
+theme_override_font_sizes/font_size = 16
 text = "Options"
 
 [node name="Quit" type="Button" parent="Button_manager"]
 top_level = true
-layout_mode = 0
-offset_left = 487.0
-offset_top = 327.0
-offset_right = 538.0
-offset_bottom = 349.0
-theme_override_font_sizes/font_size = 10
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.444861
+anchor_top = 0.527778
+anchor_right = 0.444861
+anchor_bottom = 0.527778
+offset_left = -16.48
+offset_top = -14.0
+offset_right = 39.52
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_lal7i")
+theme_override_font_sizes/font_size = 16
 text = "Quit
 "
+metadata/_edit_use_anchors_ = true
 
 [node name="Menu_background" parent="." instance=ExtResource("1_08w0m")]
 position = Vector2(-27, 16)
 
+[connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="pressed" from="Button_manager/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Button_manager/Option" to="." method="_on_option_pressed"]
 [connection signal="pressed" from="Button_manager/Quit" to="." method="_on_quit_pressed"]

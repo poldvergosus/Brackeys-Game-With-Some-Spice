@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b28b506idtww3"]
+
+[ext_resource type="Script" path="res://Scripts/leader_board.gd" id="1_8rr5a"]
+[ext_resource type="FontFile" uid="uid://cp3dbyi3lgf5p" path="res://Assets/fonts/Kenney Mini Square Mono.ttf" id="2_ossth"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8rr5a")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 55.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_ossth")
+theme_override_font_sizes/font_size = 16
+text = "0.0.0.0."
+
+[connection signal="ready" from="." to="." method="_on_ready"]

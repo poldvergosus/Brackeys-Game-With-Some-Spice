@@ -7,5 +7,5 @@ func _ready():
 	video_stream_player.connect("finished", Callable(self, "_on_video_finished"))
 
 func _on_video_finished():
-	print("Видео закончилось, закрываем игру")
-	get_tree().quit()
+	print("Видео закончилось")
+	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")

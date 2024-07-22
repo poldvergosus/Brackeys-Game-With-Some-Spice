@@ -16,6 +16,7 @@ var infinite_jump: bool = false
 var dead: bool = false
 var coyote: bool = false
 var last_floor: bool = false
+#var played_jump_sound: bool = false
 
 func _ready():
 	game_manager.update_death_label()
@@ -24,13 +25,19 @@ func _ready():
 func _physics_process(delta):
 	if dead:
 		return
-
 	apply_gravity(delta)
 	handle_coyote_time()
 	handle_jump()
 	handle_movement(delta)
 	update_animation()
+	stupid_jump_sound()
 	move_and_slide()
+	
+	
+func stupid_jump_sound():
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote):
+		randomize_jump_sound_pitch()
+		jump.play()
 
 func apply_gravity(delta):
 	if not is_on_floor():
@@ -38,8 +45,8 @@ func apply_gravity(delta):
 
 func handle_coyote_time():
 	if is_on_floor():
-		last_floor = true #указывает на то, что игрок был на земле в предыдущем кадре
-	elif last_floor: #проверяет, был ли игрок на земле в предыдущем кадре
+		last_floor = true
+	elif last_floor:
 		last_floor = false
 		coyote = true
 		coyote_timer.start()
@@ -51,13 +58,11 @@ func handle_jump():
 			coyote = false
 			coyote_timer.stop()
 
-
 func randomize_jump_sound_pitch():
-	var min_pitch = 0.5  # Минимальное значение pitch scale
-	var max_pitch = 1.1  # Максимальное значение pitch scale
+	var min_pitch = 0.4
+	var max_pitch = 1.0
 	var random_pitch = randf_range(min_pitch, max_pitch)
 	jump.pitch_scale = random_pitch
-	
 
 func handle_movement(delta):
 	var direction = Input.get_axis("move_left", "move_right")
@@ -71,11 +76,7 @@ func update_animation():
 	if is_on_floor():
 		animated_sprite.play("run" if velocity.x != 0 else "Idle")
 	else:
-		if animated_sprite.animation != "jump":
-			animated_sprite.play("jump")
-			randomize_jump_sound_pitch()
-			jump.play()
-		
+		animated_sprite.play("jump")
 
 func _on_coyote_timer_timeout():
 	if infinite_jump:

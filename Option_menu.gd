@@ -13,4 +13,3 @@ func _on_volume_sfx_value_changed(value):
 
 func _on_button_pressed():
 	option_menu.visible = false
-	
